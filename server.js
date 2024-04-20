@@ -13,7 +13,7 @@ app.use(express.json());
 const mongoose = require("mongoose");
 
 
-let url =  "mongodb://127.0.0.1:27017/workexperience";
+let url =  "mongodb+srv://ossu2300:Imdb1337@cluster0.ucubphd.mongodb.net/workexperience?retryWrites=true&w=majority&appName=workexperience/workexperiences";
 
 //connection till MongoDB
 mongoose.connect(url).then(() => {
@@ -34,72 +34,71 @@ const workexperienceSchema = new mongoose.Schema({
     
     companyname: {
         type: String, 
-        require: true, 
+        required: true
     },
 
     jobtitle: {
         type: String, 
-        require: true, 
+        required: true 
     },
 
     location: {
         type: String, 
-        require: true,
+        required: true
     },
     startdate: {
         type: Date, 
-        require: true,
+        required: true
     },
     enddate: {
         type: Date, 
-        require: true,
+        required: true
     }
 });
 
 //Skapar en tabell
 const workexperience = mongoose.model("Workexperience", workexperienceSchema);
 
+//-------------------------------------------------------------//
+//-------------------------------------------------------------//
+//-------------------------GET------------------------------------//
 
 app.get("/workexperiences", async(request, response) =>{
     try {
-        let results = await workexperience.find({});       
+        let results = await workexperience.find({}, {__v: 0 })//hämtar allt utom __v i workexperience
 
         return response.json(results);
     }
     catch(error) {
-        return response.json({message: "failed to get workexperiences"})
+        response.json({message: "failed to get workexperiences"})
+        console.log(error)
     }
-})
+});
 
+//-------------------------------------------------------------//
+//-------------------------------------------------------------//
+//--------------------------POST-----------------------------------//
 
 
 app.post("/workexperiences", async (request, response) => {
-    let companyname = request.body.companyname;
-    let jobtitle = request.body.jobtitle;
-    let location = request.body.location;
-    let startdate = request.body.startdate;
-    let enddate = request.body.enddate;
-
-    if (!companyname || !jobtitle || !location || !startdate || !enddate) {
-        response.status(400).json({ error: "You have to fill in all fields" }); 
-        return;
-    }
-
     try {
-    let newWork = new workexperience({
-        companyname,
-        jobtitle,
-        location,
-        startdate,
-        enddate
-    });
 
-    await newWork.save()
-        response.json({message: "workexperience added"});
-    } catch (error) {
-        return response.json({message: "failed to post to workexperiences" + error})
+        let results = await workexperience.create(request.body);
+
+        
+        return response.json({message: "Added to workexperiences", results})
+    } catch(error) {
+        return response.status(400).json(error);
     }
+
 });
+
+
+//-------------------------------------------------------------//
+//-------------------------------------------------------------//
+//-------------------------------------------------------------//
+
+    
 
 
 
