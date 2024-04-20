@@ -34,25 +34,25 @@ const workexperienceSchema = new mongoose.Schema({
     
     companyname: {
         type: String, 
-        required: true
+        required: [true, "Måste ha med företagsnamn"]
     },
 
     jobtitle: {
         type: String, 
-        required: true 
+        required: [true, "Måste ha med roll"] 
     },
 
     location: {
         type: String, 
-        required: true
+        required: [true, "Måste ha med plats"]
     },
     startdate: {
         type: Date, 
-        required: true
+        required: [true, "Måste ha med startdatum"]
     },
     enddate: {
         type: Date, 
-        required: true
+        required: [true, "Måste ha med slutdatum"]
     }
 });
 
@@ -96,10 +96,41 @@ app.post("/workexperiences", async (request, response) => {
 
 //-------------------------------------------------------------//
 //-------------------------------------------------------------//
+//--------------------------DELETE-----------------------------------//
+
+
+app.delete("/workexperiences:id", async (request, response) => {
+    let idData = request.params.id;
+
+    console.log(idData);
+
+    try {
+        await workexperience.findByIdAndDelete(idData); 
+        return response.json({ message: "Workexperience deleted" });
+    } catch (error) {
+        response.status(400).json({message: "failed delete"});
+        console.log(error);
+    }
+})    
+
+
 //-------------------------------------------------------------//
+//-------------------------------------------------------------//
+//--------------------------PUT-----------------------------------//
 
-    
+app.put("/workexperiences:id", async (request, response) => {
+    let idData = request.params.id;
 
+    console.log(idData);
+
+    try {
+        await workexperience.findByIdAndUpdate(idData, request.body); 
+        return response.json({ message: "Workexperience updated" });
+    } catch (error) {
+        response.status(400).json({message: "failed update"});
+        console.log(error);
+    }
+})   
 
 
 
