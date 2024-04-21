@@ -3,7 +3,7 @@ I denna uppgift skrivs en REST API med express och node. API:et inheåller olika
 som jag arbetat hos. Den inehåller funktionerna för CRUD (Create, Read, Update, Delete).
 
 ## Installation
-Uppgiften använder sig av MongoDB som databas, den är uppladdad via Render.
+Uppgiften använder sig av MongoDB som databas, den är uppladdad via Render. Vid hämtning via render kan de ta upp till 50 sekunder då den går i viloläge om den ej används. 
 
 I databasen finns det en collection som ser ut enligt nedan.
  
