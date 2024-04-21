@@ -13,7 +13,7 @@ app.use(express.json());
 const mongoose = require("mongoose");
 
 
-let url =  "mongodb+srv://ossu2300:Imdb1337@cluster0.ucubphd.mongodb.net/workexperience?retryWrites=true&w=majority&appName=workexperience/workexperiences";
+let url =  "mongodb+srv://ossu2300:Password123@cluster0.ucubphd.mongodb.net/workexperience?retryWrites=true&w=majority&appName=workexperience/workexperiences";
 
 //connection till MongoDB
 mongoose.connect(url).then(() => {
