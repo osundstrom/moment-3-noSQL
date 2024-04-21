@@ -1,4 +1,4 @@
-# Moment 2 - REST-webbtjänst
+# Moment 3 - NoSQL-databaser
 I denna uppgift skrivs en REST API med express och node. API:et inheåller olika arbetsplatser (fiktiva) 
 som jag arbetat hos. Den inehåller funktionerna för CRUD (Create, Read, Update, Delete).
 
