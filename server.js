@@ -71,7 +71,7 @@ app.get("/workexperiences", async(request, response) =>{
     }
     catch(error) {
         response.json({message: "failed to get workexperiences"})
-        response.json(error);
+        console.log(error)
     }
 });
 
